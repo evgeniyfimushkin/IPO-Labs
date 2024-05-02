@@ -1,8 +1,6 @@
 package edu.evgen.fights;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.RequiredArgsConstructor;
 
 @Data
 public class Fighter {
@@ -11,7 +9,6 @@ public class Fighter {
 
     public Fighter(String name) {
         this.name = name;
-
     }
 
     @Override
