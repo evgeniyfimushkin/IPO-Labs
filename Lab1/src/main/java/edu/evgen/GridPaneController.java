@@ -23,7 +23,7 @@ public class GridPaneController {
     }
 
     public void fill() {
-        textFields = new TextField[FightersReopsitory.getFighters().size() + 1][FightersReopsitory.getFighters().size() + 1];
+        textFields = new TextField[FightersReopsitory.getFighters().size() + 1 + 2][FightersReopsitory.getFighters().size() + 1];
 
         gridPane = new GridPane();
 
@@ -86,7 +86,7 @@ public class GridPaneController {
                     textFields[i][j].setPrefHeight(40);
 
                     ContextMenu contextMenu = new ContextMenu();
-                    MenuItem menuItem = new MenuItem("Set score" + (i - 1 )+ (j - 1));
+                    MenuItem menuItem = new MenuItem("Set score" + (i - 1) + (j - 1));
                     int finalI = i;
                     int finalJ = j;
                     menuItem.setOnAction(e -> {
@@ -99,6 +99,60 @@ public class GridPaneController {
                     gridPane.add(textFields[i][j], i, j);
                 }
             }
+        }
+
+        //Заполнение полей результата
+
+        int size = FightersReopsitory.getFighters().size();
+
+        textFields[size + 1][0] = new TextField();
+        textFields[size + 1][0].setEditable(false);
+        textFields[size + 1][0].setStyle("-fx-background-color: rgba(255, 0, 0, 0.7);" + // Красный фон с прозрачностью 70%
+                "-fx-text-fill: yellow;" + // Желтый цвет текста
+                "-fx-font-size: 15px;" + // Размер шрифта 15
+                "-fx-background-insets: 5 5 5 5;" + // Отступы внутри TextField
+                "-fx-wrap-text: true;"); // Перенос текста на новую строку
+        textFields[size + 1][0].setPrefHeight(40);
+        textFields[size + 1][0].setContextMenu(new ContextMenu());
+        textFields[size + 1][0].setText("Побед");
+        gridPane.add(textFields[size + 1][0], size + 1, 0);
+
+        textFields[size + 2][0] = new TextField();
+        textFields[size + 2][0].setEditable(false);
+        textFields[size + 2][0].setStyle("-fx-background-color: rgba(255, 0, 0, 0.7);" + // Красный фон с прозрачностью 70%
+                "-fx-text-fill: yellow;" + // Желтый цвет текста
+                "-fx-font-size: 15px;" + // Размер шрифта 15
+                "-fx-background-insets: 5 5 5 5;" + // Отступы внутри TextField
+                "-fx-wrap-text: true;"); // Перенос текста на новую строку
+        textFields[size + 2][0].setPrefHeight(40);
+        textFields[size + 2][0].setContextMenu(new ContextMenu());
+        textFields[size + 2][0].setText("Рейтинг");
+        gridPane.add(textFields[size + 2][0], size + 2, 0);
+
+        for (int i = 1; i < size + 1; i++) {
+            textFields[size + 1][i] = new TextField();
+            textFields[size + 1][i].setEditable(false);
+            textFields[size + 1][i].setStyle("-fx-background-color: rgba(255, 0, 0, 0.7);" + // Красный фон с прозрачностью 70%
+                    "-fx-text-fill: yellow;" + // Желтый цвет текста
+                    "-fx-font-size: 15px;" + // Размер шрифта 15
+                    "-fx-background-insets: 5 5 5 5;" + // Отступы внутри TextField
+                    "-fx-wrap-text: true;"); // Перенос текста на новую строку
+            textFields[size + 1][i].setPrefHeight(40);
+            textFields[size + 1][i].setContextMenu(new ContextMenu());
+
+            textFields[size + 2][i] = new TextField();
+            textFields[size + 2][i].setEditable(false);
+            textFields[size + 2][i].setStyle("-fx-background-color: rgba(255, 0, 0, 0.7);" + // Красный фон с прозрачностью 70%
+                    "-fx-text-fill: yellow;" + // Желтый цвет текста
+                    "-fx-font-size: 15px;" + // Размер шрифта 15
+                    "-fx-background-insets: 5 5 5 5;" + // Отступы внутри TextField
+                    "-fx-wrap-text: true;"); // Перенос текста на новую строку
+            textFields[size + 2][i].setPrefHeight(40);
+            textFields[size + 2][i].setContextMenu(new ContextMenu());
+
+
+            gridPane.add(textFields[size + 1][i], size + 1, i);
+            gridPane.add(textFields[size + 2][i], size + 2, i);
         }
 
 
