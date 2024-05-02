@@ -1,6 +1,9 @@
 package edu.evgen;
 
+import edu.evgen.fights.Fighter;
 import edu.evgen.fights.FightersReopsitory;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
@@ -23,14 +26,20 @@ public class GridPaneController {
     }
 
     public void fill() {
-        textFields = new TextField[FightersReopsitory.getFighters().size() + 1 + 2][FightersReopsitory.getFighters().size() + 1];
+        hBoxFighters.getChildren().clear();
+
+        textFields = new TextField[FightersReopsitory.getFighters().size() + 1 + 2][FightersReopsitory.getFighters().size() + 2];
 
         gridPane = new GridPane();
 
-        hBoxFighters.getChildren().clear();
 
         //заполнение крайних полей игроков
         FightersReopsitory.getFighters().forEach(fighter -> {
+
+
+            MenuItem menuItem = new MenuItem("delete this fighter");
+            menuItem.setOnAction(e -> removeElement(fighter));
+            ContextMenu contextMenu = new ContextMenu(menuItem);
 
             TextField textField = new TextField();
             textField.setText(fighter.getId() + ". " + fighter.getName());
@@ -42,13 +51,19 @@ public class GridPaneController {
                     "-fx-wrap-text: true;"); // Перенос текста на новую строку
             textField.setPrefHeight(40);
             textField.setContextMenu(new ContextMenu());
+            textField.setContextMenu(contextMenu);
+
+            MenuItem menuItem1 = new MenuItem("delete this fighter");
+            menuItem1.setOnAction(e -> removeElement(fighter));
+            ContextMenu contextMenu1 = new ContextMenu(menuItem1);
+
 
             TextField textField1 = new TextField();
             textField1.setText(textField.getText());
             textField1.setEditable(textField.isEditable());
             textField1.setStyle(textField.getStyle());
             textField1.setPrefHeight(textField.getPrefHeight());
-            textField1.setContextMenu(new ContextMenu());
+            textField1.setContextMenu(contextMenu1);
 
             textFields[0][fighter.getId() + 1] = textField;
             textFields[fighter.getId() + 1][0] = textField1;
@@ -168,6 +183,11 @@ public class GridPaneController {
             System.out.println(); // Переход на новую строку для следующей строки
         }
 
+    }
+
+    private void removeElement(Fighter fighter) {
+        FightersReopsitory.removeFighter(fighter);
+        fill();
     }
 
     private void setScore(int i, int j) {

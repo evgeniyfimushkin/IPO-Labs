@@ -1,5 +1,7 @@
 package edu.evgen.fights;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import lombok.Data;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
@@ -13,6 +15,10 @@ public class FightersReopsitory {
     @Getter
     private final static List<Fighter> fighters = new ArrayList<>();
 
+    private static void setUpIds() {
+        fighters.forEach(fighter -> fighter.setId(fighters.indexOf(fighter)));
+    }
+
     public static void addFighter(String... fightersNames) {
 
         for (String fighter : fightersNames) {
@@ -20,9 +26,16 @@ public class FightersReopsitory {
         }
 
         //setting id as index of array
-        fighters.forEach(fighter -> fighter.setId(fighters.indexOf(fighter)));
+        setUpIds();
 
         log.info("AllFighters: ");
         fighters.forEach(fighter -> log.info("{}", fighter));
     }
+
+    public static void removeFighter(Fighter fighter) {
+        fighters.remove(fighter);
+        setUpIds();
+        log.info("size after remove: {}", fighters.size());
+    }
+
 }
