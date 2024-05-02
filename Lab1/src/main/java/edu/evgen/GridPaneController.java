@@ -2,8 +2,6 @@ package edu.evgen;
 
 import edu.evgen.fights.Fighter;
 import edu.evgen.fights.FightersReopsitory;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
@@ -11,18 +9,16 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.Arrays;
-import java.util.Collections;
-
 @Slf4j
 public class GridPaneController {
     HBox hBoxFighters;
     GridPane gridPane;
     TextField[][] textFields;
+    ContextMenu emptyContextMenu;
 
     public GridPaneController(HBox hBoxFighters) {
         this.hBoxFighters = hBoxFighters;
-
+        emptyContextMenu = new ContextMenu();
     }
 
     public void fill() {
@@ -41,16 +37,8 @@ public class GridPaneController {
             menuItem.setOnAction(e -> removeElement(fighter));
             ContextMenu contextMenu = new ContextMenu(menuItem);
 
-            TextField textField = new TextField();
+            TextField textField = createTextField();
             textField.setText(fighter.getId() + ". " + fighter.getName());
-            textField.setEditable(false);
-            textField.setStyle("-fx-background-color: rgba(255, 0, 0, 0.7);" + // Красный фон с прозрачностью 70%
-                    "-fx-text-fill: yellow;" + // Желтый цвет текста
-                    "-fx-font-size: 15px;" + // Размер шрифта 15
-                    "-fx-background-insets: 5 5 5 5;" + // Отступы внутри TextField
-                    "-fx-wrap-text: true;"); // Перенос текста на новую строку
-            textField.setPrefHeight(40);
-            textField.setContextMenu(new ContextMenu());
             textField.setContextMenu(contextMenu);
 
             MenuItem menuItem1 = new MenuItem("delete this fighter");
@@ -58,11 +46,8 @@ public class GridPaneController {
             ContextMenu contextMenu1 = new ContextMenu(menuItem1);
 
 
-            TextField textField1 = new TextField();
+            TextField textField1 = createTextField();
             textField1.setText(textField.getText());
-            textField1.setEditable(textField.isEditable());
-            textField1.setStyle(textField.getStyle());
-            textField1.setPrefHeight(textField.getPrefHeight());
             textField1.setContextMenu(contextMenu1);
 
             textFields[0][fighter.getId() + 1] = textField;
@@ -75,15 +60,7 @@ public class GridPaneController {
 
         //заполнение диагонали
         for (int i = 0; i < FightersReopsitory.getFighters().size() + 1; i++) {
-            textFields[i][i] = new TextField();
-            textFields[i][i].setEditable(false);
-            textFields[i][i].setStyle("-fx-background-color: rgba(255, 0, 0, 0.7);" + // Красный фон с прозрачностью 70%
-                    "-fx-text-fill: yellow;" + // Желтый цвет текста
-                    "-fx-font-size: 15px;" + // Размер шрифта 15
-                    "-fx-background-insets: 5 5 5 5;" + // Отступы внутри TextField
-                    "-fx-wrap-text: true;"); // Перенос текста на новую строку
-            textFields[i][i].setPrefHeight(40);
-            textFields[i][i].setContextMenu(new ContextMenu());
+            textFields[i][i] = createTextField();
             gridPane.add(textFields[i][i], i, i);
         }
 
@@ -91,14 +68,7 @@ public class GridPaneController {
         for (int i = 1; i < FightersReopsitory.getFighters().size() + 1; i++) {
             for (int j = 1; j < FightersReopsitory.getFighters().size() + 1; j++) {
                 if (i != j) {
-                    textFields[i][j] = new TextField();
-                    textFields[i][j].setEditable(false);
-                    textFields[i][j].setStyle("-fx-background-color: rgba(255, 0, 0, 0.7);" + // Красный фон с прозрачностью 70%
-                            "-fx-text-fill: yellow;" + // Желтый цвет текста
-                            "-fx-font-size: 15px;" + // Размер шрифта 15
-                            "-fx-background-insets: 5 5 5 5;" + // Отступы внутри TextField
-                            "-fx-wrap-text: true;"); // Перенос текста на новую строку
-                    textFields[i][j].setPrefHeight(40);
+                    textFields[i][j] = createTextField();
 
                     ContextMenu contextMenu = new ContextMenu();
                     MenuItem menuItem = new MenuItem("Set score" + (i - 1) + (j - 1));
@@ -120,50 +90,18 @@ public class GridPaneController {
 
         int size = FightersReopsitory.getFighters().size();
 
-        textFields[size + 1][0] = new TextField();
-        textFields[size + 1][0].setEditable(false);
-        textFields[size + 1][0].setStyle("-fx-background-color: rgba(255, 0, 0, 0.7);" + // Красный фон с прозрачностью 70%
-                "-fx-text-fill: yellow;" + // Желтый цвет текста
-                "-fx-font-size: 15px;" + // Размер шрифта 15
-                "-fx-background-insets: 5 5 5 5;" + // Отступы внутри TextField
-                "-fx-wrap-text: true;"); // Перенос текста на новую строку
-        textFields[size + 1][0].setPrefHeight(40);
-        textFields[size + 1][0].setContextMenu(new ContextMenu());
+        textFields[size + 1][0] = createTextField();
         textFields[size + 1][0].setText("Побед");
         gridPane.add(textFields[size + 1][0], size + 1, 0);
 
-        textFields[size + 2][0] = new TextField();
-        textFields[size + 2][0].setEditable(false);
-        textFields[size + 2][0].setStyle("-fx-background-color: rgba(255, 0, 0, 0.7);" + // Красный фон с прозрачностью 70%
-                "-fx-text-fill: yellow;" + // Желтый цвет текста
-                "-fx-font-size: 15px;" + // Размер шрифта 15
-                "-fx-background-insets: 5 5 5 5;" + // Отступы внутри TextField
-                "-fx-wrap-text: true;"); // Перенос текста на новую строку
-        textFields[size + 2][0].setPrefHeight(40);
-        textFields[size + 2][0].setContextMenu(new ContextMenu());
+        textFields[size + 2][0] = createTextField();
         textFields[size + 2][0].setText("Рейтинг");
         gridPane.add(textFields[size + 2][0], size + 2, 0);
 
         for (int i = 1; i < size + 1; i++) {
-            textFields[size + 1][i] = new TextField();
-            textFields[size + 1][i].setEditable(false);
-            textFields[size + 1][i].setStyle("-fx-background-color: rgba(255, 0, 0, 0.7);" + // Красный фон с прозрачностью 70%
-                    "-fx-text-fill: yellow;" + // Желтый цвет текста
-                    "-fx-font-size: 15px;" + // Размер шрифта 15
-                    "-fx-background-insets: 5 5 5 5;" + // Отступы внутри TextField
-                    "-fx-wrap-text: true;"); // Перенос текста на новую строку
-            textFields[size + 1][i].setPrefHeight(40);
-            textFields[size + 1][i].setContextMenu(new ContextMenu());
+            textFields[size + 1][i] = createTextField();
 
-            textFields[size + 2][i] = new TextField();
-            textFields[size + 2][i].setEditable(false);
-            textFields[size + 2][i].setStyle("-fx-background-color: rgba(255, 0, 0, 0.7);" + // Красный фон с прозрачностью 70%
-                    "-fx-text-fill: yellow;" + // Желтый цвет текста
-                    "-fx-font-size: 15px;" + // Размер шрифта 15
-                    "-fx-background-insets: 5 5 5 5;" + // Отступы внутри TextField
-                    "-fx-wrap-text: true;"); // Перенос текста на новую строку
-            textFields[size + 2][i].setPrefHeight(40);
-            textFields[size + 2][i].setContextMenu(new ContextMenu());
+            textFields[size + 2][i] = createTextField();
 
 
             gridPane.add(textFields[size + 1][i], size + 1, i);
@@ -183,6 +121,22 @@ public class GridPaneController {
             System.out.println(); // Переход на новую строку для следующей строки
         }
 
+    }
+
+    private TextField createTextField() {
+        TextField textField = new TextField();
+        textField.setEditable(false);
+        textField.setStyle(
+                "-fx-background-color: rgba(255, 0, 0, 0.7);" + // Красный фон с прозрачностью 70%
+                        "-fx-text-fill: yellow;" + // Желтый цвет текста
+                        "-fx-font-size: 15px;" + // Размер шрифта 15
+                        "-fx-background-insets: 5 5 5 5;" + // Отступы внутри TextField
+                        "-fx-wrap-text: true;" + // Перенос текста на новую строку
+                        "-fx-alignment: center;"
+        );
+        textField.setPrefHeight(40);
+        textField.setContextMenu(emptyContextMenu);
+        return textField;
     }
 
     private void removeElement(Fighter fighter) {
