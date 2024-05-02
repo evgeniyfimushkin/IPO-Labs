@@ -20,7 +20,7 @@ public class MainController {
     @FXML
     TextField fightersTextField;
     @FXML
-    HBox hBox;
+    HBox hBox, hBoxFighters;
     @FXML
     VBox vBox;
 
@@ -50,22 +50,28 @@ public class MainController {
 
         GridPane gridPane = new GridPane();
 
-        vBox.getChildren().clear();
+        hBoxFighters.getChildren().clear();
         FightersReopsitory.getFighters().forEach(fighter -> {
+
             TextField textField = new TextField();
-            textField.setText(fighter.getName());
+            textField.setText(fighter.getId() + ". " + fighter.getName());
             textField.setEditable(false);
-
+            textField.setStyle("-fx-background-color: rgba(255, 0, 0, 0.7);" + // Красный фон с прозрачностью 70%
+                    "-fx-text-fill: yellow;" + // Желтый цвет текста
+                    "-fx-font-size: 15px;" + // Размер шрифта 15
+                    "-fx-background-insets: 5 5 5 5;" + // Отступы внутри TextField
+                    "-fx-wrap-text: true;"); // Перенос текста на новую строку
             TextField textField1 = new TextField();
-            textField1.setText(fighter.getName());
-            textField1.setEditable(false);
-            gridPane.add(textField,fighter.getId()+1,0);
+            textField1.setText(textField.getText());
+            textField1.setEditable(textField.isEditable());
+            textField1.setStyle(textField.getStyle());
 
-            gridPane.add(textField1,0,fighter.getId()+1);
+            gridPane.add(textField, fighter.getId() + 1, 0);
+
+            gridPane.add(textField1, 0, fighter.getId() + 1);
         });
 
-        vBox.getChildren().add(gridPane);
-        VBox.setVgrow(gridPane, Priority.ALWAYS);
+        hBoxFighters.getChildren().add(gridPane);
 
 
     }
