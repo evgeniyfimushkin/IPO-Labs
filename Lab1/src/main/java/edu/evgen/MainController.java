@@ -23,10 +23,12 @@ public class MainController {
     HBox hBox, hBoxFighters;
     @FXML
     VBox vBox;
+    GridPaneController gridPaneController;
 
     @FXML
     @SneakyThrows
     private void initialize() {
+
         fightersTextField.setFocusTraversable(false);
         hBox.setStyle("-fx-background-image: url('/img.jpg');" +
                 "-fx-background-repeat: stretch;" +
@@ -38,6 +40,9 @@ public class MainController {
                 "-fx-background-position: center center;" +
                 "-fx-text-fill: yellow;");
         fightersTextField.setOnAction(this::fightersTextFieldHandler);
+
+
+        gridPaneController = new GridPaneController(hBoxFighters);
     }
 
     @SneakyThrows
@@ -48,32 +53,7 @@ public class MainController {
         FightersReopsitory.addFighter(fighters);
         fightersTextField.clear();
 
-        GridPane gridPane = new GridPane();
-
-        hBoxFighters.getChildren().clear();
-        FightersReopsitory.getFighters().forEach(fighter -> {
-
-            TextField textField = new TextField();
-            textField.setText(fighter.getId() + ". " + fighter.getName());
-            textField.setEditable(false);
-            textField.setStyle("-fx-background-color: rgba(255, 0, 0, 0.7);" + // Красный фон с прозрачностью 70%
-                    "-fx-text-fill: yellow;" + // Желтый цвет текста
-                    "-fx-font-size: 15px;" + // Размер шрифта 15
-                    "-fx-background-insets: 5 5 5 5;" + // Отступы внутри TextField
-                    "-fx-wrap-text: true;"); // Перенос текста на новую строку
-            TextField textField1 = new TextField();
-            textField1.setText(textField.getText());
-            textField1.setEditable(textField.isEditable());
-            textField1.setStyle(textField.getStyle());
-
-            gridPane.add(textField, fighter.getId() + 1, 0);
-
-            gridPane.add(textField1, 0, fighter.getId() + 1);
-        });
-
-        hBoxFighters.getChildren().add(gridPane);
-
-
+        gridPaneController.fill();
     }
 
     public void setStage(Stage primaryStage) {

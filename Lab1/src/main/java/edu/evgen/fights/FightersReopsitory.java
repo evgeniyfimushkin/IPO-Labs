@@ -11,7 +11,7 @@ import java.util.List;
 @Slf4j
 public class FightersReopsitory {
     @Getter
-   public final static List<Fighter> fighters = new ArrayList<>();
+    private final static List<Fighter> fighters = new ArrayList<>();
 
     public static void addFighter(String... fightersNames) {
 
