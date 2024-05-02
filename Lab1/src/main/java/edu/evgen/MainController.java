@@ -1,13 +1,17 @@
 package edu.evgen;
 
-import javafx.application.Platform;
+import edu.evgen.fights.FightersReopsitory;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
 
+import java.util.List;
+
+@Slf4j
 public class MainController {
 
     private Stage stage;
@@ -29,6 +33,15 @@ public class MainController {
                 "-fx-background-size: 1280 720;" +
                 "-fx-background-position: center center;" +
                 "-fx-text-fill: yellow;");
+        fightersTextField.setOnAction(this::fightersTextFieldHandler);
+    }
+
+    private void fightersTextFieldHandler(ActionEvent event) {
+        String[] fighters = fightersTextField.getText()
+                .replace(" ", "")
+                .split(",");
+        FightersReopsitory.addFighter(fighters);
+        fightersTextField.clear();
     }
 
     public void setStage(Stage primaryStage) {
