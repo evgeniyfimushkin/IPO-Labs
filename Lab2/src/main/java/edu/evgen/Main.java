@@ -11,6 +11,7 @@ public class Main {
         Fighter fighter2 = new Fighter("john2");
         fighter.addWin(fighter1);
         fighter.addWin(fighter2);
+        fighter.setId(12);
         jsonSerializer.serialize(fighter);
         System.out.println(fighter);
         jsonSerializer.getWriter().close();

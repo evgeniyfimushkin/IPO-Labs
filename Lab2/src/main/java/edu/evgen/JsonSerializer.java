@@ -71,33 +71,51 @@ public class JsonSerializer {
 
         writer.write("{");
 
+        int jsonFieldsCount = 0;
+        for (Field field : fields) {
+            if (field.isAnnotationPresent(JsonField.class))
+                jsonFieldsCount++;
+        }
+
         for (int i = 0; i < fields.length; i++) {
             fields[i].setAccessible(true);
-            writer.write("\"" + fields[i].getName() + "\"" + ": ");
-            serialize(fields[i].get(object));
-            if ((i + 1) != fields.length)
-                writer.write(",");
+            if (fields[i].isAnnotationPresent(JsonField.class)) {
+                writer.write("\"" + fields[i].getName() + "\"" + ": ");
+                serialize(fields[i].get(object));
+                if ((i + 1) != jsonFieldsCount)
+                    writer.write(",");
+            } else {
+                System.out.println(fields[i].getName());
+            }
         }
 
         writer.write("}");
 
     }
 
-    private void serializeMapElement(Map objects) {
-        objects.forEach(this::serialize);
-    }
-
     @SneakyThrows
-    private void serializeListElement(List<?> objects) {
+    private void serializeMapElement(Map objects) {
         writer.write("[");
-        for (int i = 0; i < objects.size(); i++){
+        for (int i = 0; i < objects.size(); i++) {
             serialize(objects.get(i));
-            if ((i+1)!= objects.size())
+            if ((i + 1) != objects.size())
                 writer.write(",");
         }
         writer.write("]");
     }
 
+    @SneakyThrows
+    private void serializeListElement(List<?> objects) {
+        writer.write("[");
+        for (int i = 0; i < objects.size(); i++) {
+            serialize(objects.get(i));
+            if ((i + 1) != objects.size())
+                writer.write(",");
+        }
+        writer.write("]");
+    }
+
+    @SneakyThrows
     private void serializeArrayElement(Object object) {
 
     }
