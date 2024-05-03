@@ -1,10 +1,14 @@
 package edu.evgen;
 
 import edu.evgen.controllers.MainController;
+import edu.evgen.fights.Fighter;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
 
 public class Main extends Application {
 
@@ -21,5 +25,12 @@ public class Main extends Application {
         stage.setResizable(false);
         stage.show();
 
+        Fighter fighter = new Fighter("John");
+        Field name = fighter.getClass().getDeclaredField("name");
+        name.setAccessible(true);
+        System.out.println(name.get(fighter));
+        name.set(fighter,"Roman");
+        System.out.println(name.get(fighter));
+        System.out.println(fighter);
     }
 }
