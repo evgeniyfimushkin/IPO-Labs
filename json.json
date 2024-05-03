@@ -1,16 +1,37 @@
-{
-  "id": 12,
-  "name": "john",
-  "wins": [
-    {
-      "id": null,
-      "name": "john1",
-      "wins": []
-    },
-    {
-      "id": null,
-      "name": "john2",
-      "wins": []
-    }
-  ]
-}
+[
+  {
+    "id": 12,
+    "name": "john",
+    "wins": [
+      {
+        "id": null,
+        "name": "john1",
+        "wins": [],
+        "ints": []
+      },
+      {
+        "id": null,
+        "name": "john2",
+        "wins": [],
+        "ints": []
+      }
+    ],
+    "ints": [
+      1,
+      2,
+      3
+    ]
+  },
+  {
+    "id": null,
+    "name": "john1",
+    "wins": [],
+    "ints": []
+  },
+  {
+    "id": null,
+    "name": "john2",
+    "wins": [],
+    "ints": []
+  }
+]

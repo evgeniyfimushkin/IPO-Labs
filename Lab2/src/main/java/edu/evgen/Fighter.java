@@ -13,6 +13,8 @@ public class Fighter {
     private String name;
     @JsonField
     private final List<Fighter> wins = new ArrayList<>();
+    @JsonField
+    private final List<Integer> ints = new ArrayList<>();
 
     public Fighter(String name) {
         this.name = name;

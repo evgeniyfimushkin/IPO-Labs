@@ -1,5 +1,6 @@
 package edu.evgen;
 
+import edu.evgen.jsonParser.JsonParser;
 import lombok.SneakyThrows;
 
 public class Main {
@@ -12,9 +13,14 @@ public class Main {
         fighter.addWin(fighter1);
         fighter.addWin(fighter2);
         fighter.setId(12);
-        jsonSerializer.serialize(fighter);
-        System.out.println(fighter);
+        fighter.getInts().add(1);
+        fighter.getInts().add(2);
+        fighter.getInts().add(3);
+        jsonSerializer.serialize(fighter,fighter1,fighter2);
+//        System.out.println(fighter);
         jsonSerializer.getWriter().close();
+
+        JsonParser jsonDeserializer = new JsonParser();
     }
 
 }

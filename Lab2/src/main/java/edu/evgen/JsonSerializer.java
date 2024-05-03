@@ -36,7 +36,7 @@ public class JsonSerializer {
         for (int i = 0; i < objects.length; i++) {
             serialize(objects[i]);
             if ((i + 1) != objects.length) {
-                System.out.println(",,,,,,,,,,,,,,,,,,,");
+//                System.out.println(",,,,,,,,,,,,,,,,,,,");
                 writer.write(",");
             }
         }
@@ -85,7 +85,7 @@ public class JsonSerializer {
                 if ((i + 1) != jsonFieldsCount)
                     writer.write(",");
             } else {
-                System.out.println(fields[i].getName());
+//                System.out.println(fields[i].getName());
             }
         }
 
@@ -115,7 +115,6 @@ public class JsonSerializer {
         writer.write("]");
     }
 
-    @SneakyThrows
     private void serializeArrayElement(Object object) {
 
     }
@@ -128,7 +127,7 @@ public class JsonSerializer {
     @SneakyThrows
     private void serializeElementNumber(Object object) {
         writer.write(object.toString());
-        System.out.println("NUMBER");
+//        System.out.println("NUMBER");
     }
 
     @SneakyThrows
