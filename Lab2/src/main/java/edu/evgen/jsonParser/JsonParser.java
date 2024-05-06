@@ -2,87 +2,48 @@ package edu.evgen.jsonParser;
 
 import lombok.SneakyThrows;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.util.HashMap;
-import java.util.Map;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
-public class JsonParser {
-    String json;
-    ObjectParser objectParser;
+public class JsonParser<T> {
+    private final Class classObject;
+    private T object;
+    private FileInputStream in;
 
-    Integer pointer = 0;
+    public JsonParser(Class classObject) {
+        this.classObject = classObject;
+    }
 
     @SneakyThrows
-    public JsonParser() {
-        try (FileReader fileReader = new FileReader("json.json");
-             BufferedReader bufferedReader = new BufferedReader(fileReader)) {
-            json = bufferedReader.readLine();
+    public T parsing(String filename) {
+        try {
+
+            object = (T) classObject.getDeclaredConstructor().newInstance();
+            in = new FileInputStream(filename);
+            int i;
+            System.out.println();
+            System.out.println();
+            i = in.read();
+            do {
+
+                if (i == '{')
+                    parsingObject(i);
+
+
+
+                System.out.print((char) i);
+                i = in.read();
+            } while (i != -1);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-
-        System.out.println(json);
+        return object;
     }
 
-    public Object parsing() {
+    private Object parsingObject(int i) {
 
-        switch (json.charAt(pointer++)) {
-            case '{':
-                objectParsing();
-            case '[':
-                arrayparsing();
-
-        }
-
-        return new Object();
-    }
-
-    private void arrayparsing() {
-        while (json.charAt(pointer) != ']'){
-//            mainParsing();
-        }
-    }
-
-    private void objectParsing() {
-        while (json.charAt(pointer) != '}'){
-            fieldsParsing();
-        }
-    }
-
-    private void fieldsParsing() {
 
     }
-    public Map<String,Object> parseJson(String jsonString) {
-        Map<String, Object> jsonObject = new HashMap<>();
 
-        int i = 0;
-        char[] chars = jsonString.toCharArray();
-        while (i < chars.length) {
-            StringBuilder key = new StringBuilder();
-            StringBuilder value = new StringBuilder();
-
-            // Чтение ключа
-            while (i < chars.length && chars[i] != ':') {
-                if (chars[i] != '"' && chars[i] != '{' && chars[i] != '}') {
-                    key.append(chars[i]);
-                }
-                i++;
-            }
-            i++; // Пропуск :
-
-            // Чтение значения
-            while (i < chars.length && chars[i] != ',' && chars[i] != '}') {
-                if (chars[i] != '"' && chars[i] != '{' && chars[i] != '}') {
-                    value.append(chars[i]);
-                }
-                i++;
-            }
-            jsonObject.put(key.toString().trim(), value.toString().trim());
-
-            if (i < chars.length && chars[i] == ',') {
-                i++;
-            }
-        }
-
-        return jsonObject;
-    }
 }

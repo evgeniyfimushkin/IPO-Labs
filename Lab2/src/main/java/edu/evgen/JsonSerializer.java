@@ -2,10 +2,7 @@ package edu.evgen;
 
 import lombok.SneakyThrows;
 
-import java.io.BufferedWriter;
-import java.io.File;
 import java.io.FileWriter;
-import java.lang.reflect.Array;
 import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Map;

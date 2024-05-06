@@ -16,11 +16,13 @@ public class Main {
         fighter.getInts().add(1);
         fighter.getInts().add(2);
         fighter.getInts().add(3);
-        jsonSerializer.serialize(fighter,fighter1,fighter2);
+        jsonSerializer.serialize(fighter, fighter1, fighter2);
 //        System.out.println(fighter);
         jsonSerializer.getWriter().close();
-
-        JsonParser jsonDeserializer = new JsonParser();
+        JsonParser<Fighter> jsonParser = new JsonParser<>(Fighter.class);
+        Fighter fighterFromJson = jsonParser.parsing("json.json");
+        System.out.println();
+        System.out.println(fighterFromJson);
     }
 
 }

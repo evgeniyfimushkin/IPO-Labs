@@ -29,6 +29,8 @@ public class FightersReopsitory {
 
         log.info("AllFighters: ");
         fighters.forEach(fighter -> log.info("{}", fighter));
+
+        assert fighters.size() < 5: "Too many fighters";
     }
 
     public static void removeFighter(Fighter fighter) {

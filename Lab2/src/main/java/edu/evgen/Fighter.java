@@ -16,6 +16,9 @@ public class Fighter {
     @JsonField
     private final List<Integer> ints = new ArrayList<>();
 
+    public Fighter() {
+    }
+
     public Fighter(String name) {
         this.name = name;
     }
@@ -25,6 +28,8 @@ public class Fighter {
         return "Fighter{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
+                ", wins=" + wins +
+                ", ints=" + ints +
                 '}';
     }
 

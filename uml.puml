@@ -1,0 +1,64 @@
+@startuml
+class edu.evgen.fights.Fighter {
+- Integer id
+- String name
+- List<Fighter> wins
++ String toString()
++ void addWin(Fighter)
++ void removeWin(Fighter)
+}
+
+
+class edu.evgen.controllers.GridPaneController {
+~ HBox hBoxFighters
+~ GridPane gridPane
+~ TextField[][] textFields
+~ ContextMenu emptyContextMenu
++ void fill()
+- TextField createTextField()
+- TextField createTextField(String)
+- TextField createTextField(String,ContextMenu)
+- TextField createStyledTextField(String)
+- void removeElement(Fighter)
+- void setWin(int,int)
+}
+
+
+class edu.evgen.fights.FightersReopsitory {
+- {static} List<Fighter> fighters
+- {static} void setUpIds()
++ {static} void addFighter(String)
++ {static} void removeFighter(Fighter)
++ {static} void addWin(int,int)
++ {static} FightMarker isWin(int,int)
++ {static} void sortFightersByWins()
+}
+
+
+class edu.evgen.Main {
++ {static} void main(String[])
++ void start(Stage)
+}
+
+class edu.evgen.controllers.MainController {
+- Stage stage
+~ TextField fightersTextField
+~ HBox hBox
+~ VBox vBox
+~ GridPaneController gridPaneController
+- void initialize()
+- void fightersTextFieldHandler(ActionEvent)
++ void setStage(Stage)
+}
+
+
+enum edu.evgen.fights.FightMarker {
++  WIN
++  LOSE
++  NO
+}
+
+
+
+javafx.application.Application <|-- edu.evgen.Main
+@enduml
