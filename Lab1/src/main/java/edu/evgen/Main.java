@@ -24,13 +24,5 @@ public class Main extends Application {
         controller.setStage(stage);
         stage.setResizable(false);
         stage.show();
-
-        Fighter fighter = new Fighter("John");
-        Field name = fighter.getClass().getDeclaredField("name");
-        name.setAccessible(true);
-        System.out.println(name.get(fighter));
-        name.set(fighter,"Roman");
-        System.out.println(name.get(fighter));
-        System.out.println(fighter);
     }
 }
