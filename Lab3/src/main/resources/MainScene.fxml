@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<HBox fx:id="hBox" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" style="-fx-spacing: 10;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.evgen.controllers.MainController">
+   <children>
+      <VBox alignment="CENTER" prefHeight="720.0" prefWidth="200" style="-fx-spacing: 10;">
+         <children>
+            <Label fx:id="labelMaxAccidentValue" alignment="CENTER" prefHeight="29.0" prefWidth="200" text="Label">
+               <font>
+                  <Font size="14.0" />
+               </font></Label>
+            <Label fx:id="labelMinAccidentValue" alignment="CENTER" prefHeight="29.0" prefWidth="200" text="Label"><font>
+                  <Font size="14.0" />
+               </font></Label>
+            <Label fx:id="labelMaxWarningValue" alignment="CENTER" prefHeight="29.0" prefWidth="200" text="Label"><font>
+                  <Font size="14.0" />
+               </font></Label>
+            <Label fx:id="labelMinWarningValue" alignment="CENTER" prefHeight="29.0" prefWidth="200" text="Label"><font>
+                  <Font size="14.0" />
+               </font></Label>
+         </children>
+      </VBox>
+      <VBox alignment="CENTER" prefHeight="720.0" prefWidth="134.0" style="-fx-spacing: 10;">
+         <children>
+            <TextField fx:id="textFieldMaxAccidentValue" alignment="CENTER" prefHeight="29.0" prefWidth="161.0">
+               <font>
+                  <Font size="14.0" />
+               </font></TextField>
+            <TextField fx:id="textFieldMinAccidentValue" alignment="CENTER" prefHeight="29.0" prefWidth="161.0">
+               <font>
+                  <Font size="14.0" />
+               </font></TextField>
+            <TextField fx:id="textFieldMaxWarningValue" alignment="CENTER" prefHeight="29.0" prefWidth="161.0">
+               <font>
+                  <Font size="14.0" />
+               </font></TextField>
+            <TextField fx:id="textFieldMinWarningValue" alignment="CENTER" prefHeight="29.0" prefWidth="161.0">
+               <font>
+                  <Font size="14.0" />
+               </font></TextField>
+         </children>
+      </VBox>
+      <VBox alignment="CENTER" prefHeight="720.0" prefWidth="142.0" style="-fx-spacing: 10;">
+         <children>
+            <Button fx:id="buttonRunSimulation" mnemonicParsing="false" prefHeight="33.0" prefWidth="142.0" text="Run Simulation" />
+            <Button fx:id="buttonStopSimulation" mnemonicParsing="false" prefHeight="33.0" prefWidth="142.0" text="Stop Simulation" />
+            <TextField fx:id="textFieldProgressValue">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </TextField>
+            <Button fx:id="buttonAccept" alignment="CENTER" mnemonicParsing="false" prefHeight="29.0" prefWidth="161.0" text="Accept">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Button>
+         </children>
+      </VBox>
+      <ProgressBar fx:id="progressBar" prefHeight="172.0" prefWidth="257.0" progress="0.86" style="-fx-rotate: -90;" />
+   </children>
+</HBox>
