@@ -12,6 +12,7 @@ import javafx.stage.Stage;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 
+import java.text.DecimalFormat;
 import java.util.Random;
 
 @Slf4j
@@ -28,7 +29,7 @@ public class MainController {
     @FXML
     Label labelMaxWarningValue;
     @FXML
-    Label labelMinWarningValue;
+    Label labelMinWarningValue, labelProgress;
     @FXML
     TextField textFieldMaxWarningValue,
             textFieldMinAccidentValue,
@@ -49,6 +50,7 @@ public class MainController {
     Thread progressThread = new Thread(this::progressBarRandomize);
 
     Thread progressCheckerThread = new Thread(this::progressBarChecker);
+   DecimalFormat df = new DecimalFormat("#.##");
 
     @FXML
 
@@ -96,17 +98,26 @@ public class MainController {
     @SneakyThrows
     private void progressBarChecker() {
         while (true) {
-            if (progressBar.getProgress() > maxAccidentValue)
+            if (progressBar.getProgress() > maxAccidentValue) {
                 progressBarSetStyle("-fx-accent: red;");
-            else if (progressBar.getProgress() > maxWarningValue)
+                labelProgress.setStyle("-fx-text-fill: red;");
+            } else if (progressBar.getProgress() > maxWarningValue) {
                 progressBarSetStyle("-fx-accent: yellow;");
-            else if (progressBar.getProgress() < minAccidentValue)
+                labelProgress.setStyle("-fx-text-fill: yellow;");
+            } else if (progressBar.getProgress() < minAccidentValue) {
                 progressBarSetStyle("-fx-accent: red;");
-            else if (progressBar.getProgress() < minWarningValue)
+                labelProgress.setStyle("-fx-text-fill: red;");
+            } else if (progressBar.getProgress() < minWarningValue) {
                 progressBarSetStyle("-fx-accent: yellow;");
-            else
+                labelProgress.setStyle("-fx-text-fill: yellow;");
+            } else {
                 progressBarSetStyle("-fx-accent: green;");
-            Thread.sleep(10);
+                labelProgress.setStyle("-fx-text-fill: green;");
+            }
+            Thread.sleep(50);
+
+
+            Platform.runLater(() -> labelProgress.setText(df.format(progressBar.getProgress())));
         }
     }
 
@@ -122,7 +133,7 @@ public class MainController {
                 System.out.println(progress + " % 0.5 = " + progress % 0.5);
                 progressBar.setProgress(progress);
                 progress += sign * 0.01;
-                Thread.sleep(10);
+                Thread.sleep(50);
                 if (random.nextDouble() > 0.8)
                     sign = random.nextDouble() > 0.5 ? 1 : -1;
                 if (progress >= 1.0)

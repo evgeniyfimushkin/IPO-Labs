@@ -1,0 +1,35 @@
+@startuml
+class edu.evgen.Main {
++ {static} void main(String[])
++ void start(Stage)
+}
+
+class edu.evgen.controllers.MainController {
+~ Double maxAccidentValue
+~ Double minAccidentValue
+~ Double maxWarningValue
+~ Double minWarningValue
+~ Label labelMaxAccidentValue
+~ Label labelMinAccidentValue
+~ Label labelMaxWarningValue
+~ Label labelMinWarningValue
+~ TextField textFieldMaxWarningValue
+~ Button buttonAccept
+~ Boolean run
+~ ProgressBar progressBar
+~ Random random
+~ Thread progressThread
+~ Thread progressCheckerThread
+~ DecimalFormat df
+- void initialize()
+- void buttonAcceptAction(ActionEvent)
+- void progressBarChecker()
+- void progressBarRandomize()
+- void progressBarSetStyle(String)
+}
+
+
+
+
+javafx.application.Application <|-- edu.evgen.Main
+@enduml
